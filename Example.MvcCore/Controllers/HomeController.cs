@@ -1,5 +1,6 @@
 ﻿using Example.MvcCore.Models;
 using ImageTools.Net;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,19 +23,25 @@ namespace Example.MvcCore.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Upload()
+        {
+
             foreach (var file in Request.Form.Files)
             {
                 if (file.Length > 0)
                 {
                     using (var stream = file.OpenReadStream())
                     {
-                        stream.SaveAs("D://");
+                        stream.SaveAs($"wwwroot\\file\\{file.FileName}");
                     }
                 }
             }
-
-            return View();
+            return View("Index");
         }
+
 
         public IActionResult Privacy()
         {
