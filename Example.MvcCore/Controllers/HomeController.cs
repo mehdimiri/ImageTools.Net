@@ -35,7 +35,7 @@ namespace Example.MvcCore.Controllers
                 {
                     using (var stream = file.OpenReadStream())
                     {
-                        stream.SaveAs($"wwwroot\\file\\{file.FileName}");
+                        stream.Resize(200,100).SaveAs($"wwwroot\\file\\{file.FileName}");
                     }
                 }
             }
