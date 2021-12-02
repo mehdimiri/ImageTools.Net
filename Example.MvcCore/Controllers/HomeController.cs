@@ -1,5 +1,6 @@
 ﻿using Example.MvcCore.Models;
 using ImageTools.Net;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,10 +15,12 @@ namespace Example.MvcCore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHostingEnvironment _env;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHostingEnvironment env)
         {
+            _env = env;
             _logger = logger;
         }
 
@@ -35,7 +38,8 @@ namespace Example.MvcCore.Controllers
                 {
                     using (var stream = file.OpenReadStream())
                     {
-                        stream.Resize(200,100).SaveAs($"wwwroot\\file\\{file.FileName}");
+                        var webRoot = _env.WebRootPath + @"\logo.png";
+                        stream.AddImageWatermark(webRoot).Resize(500,300).SaveAs($"wwwroot\\file\\{file.FileName}");
                     }
                 }
             }
