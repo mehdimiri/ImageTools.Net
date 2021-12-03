@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ImageTools.Net.Tools
 {
-    static class Helper
+    public static class Helper
     {
         public static MemoryStream ToMemoryStream(this Bitmap b)
         {
@@ -22,6 +22,22 @@ namespace ImageTools.Net.Tools
             image.Save(stream, image.RawFormat);
             stream.Position = 0;
             return stream;
+        }
+
+        public static ImageCodecInfo GetImageCodecInfo(string ext)
+        {
+            int j;
+
+            ImageCodecInfo[] encoders;
+
+            encoders = ImageCodecInfo.GetImageEncoders();
+
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].FilenameExtension.ToLower().Contains(ext.ToLower()))
+                    return encoders[j];
+            }
+            return null;
         }
     }
 }
