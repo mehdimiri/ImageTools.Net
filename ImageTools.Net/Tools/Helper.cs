@@ -39,5 +39,19 @@ namespace ImageTools.Net.Tools
             }
             return null;
         }
+
+        public Image Base64ToImage(string base64string)
+        {
+
+                  byte[] bytes = Convert.FromBase64String(base64string);
+
+                 Image image;
+                 using (MemoryStream ms = new MemoryStream(bytes))
+                  {
+                    image = Image.FromStream(ms);
+                    }
+
+              return image;
+        }
     }
 }
