@@ -53,5 +53,27 @@ namespace ImageTools.Net.Tools
 
               return image;
         }
+
+         public static string FromImage(Image val)
+         {
+            MemoryStream stream = new MemoryStream();
+           try
+           {
+             val.Save(stream, val.RawFormat);
+           }
+           catch (ArgumentNullException)
+           {
+             val.Save(stream, ImageFormat.Bmp);
+           }
+          return Convert.ToBase64String(stream.GetBuffer());
+         }
+
+             public static byte[] getBytesFromImage(Image im)
+            {
+            MemoryStream ms = new MemoryStream();
+
+            im.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return ms.ToArray();
+            }
     }
 }
