@@ -40,7 +40,7 @@ namespace ImageTools.Net.Tools
             return null;
         }
 
-        public Image Base64ToImage(string base64string)
+        public Image Base64ToImage(string base64String)
         {
 
                   byte[] bytes = Convert.FromBase64String(base64string);
@@ -54,7 +54,7 @@ namespace ImageTools.Net.Tools
               return image;
         }
 
-         public static string FromImage(Image val)
+         public static string ImageToBase64(Image val)
          {
             MemoryStream stream = new MemoryStream();
            try
@@ -68,7 +68,7 @@ namespace ImageTools.Net.Tools
           return Convert.ToBase64String(stream.GetBuffer());
          }
 
-             public static byte[] getBytesFromImage(Image im)
+             public static byte[] ImageToBytes(Image im)
             {
             MemoryStream ms = new MemoryStream();
 
