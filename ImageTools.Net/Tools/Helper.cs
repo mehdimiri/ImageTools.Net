@@ -54,25 +54,25 @@ namespace ImageTools.Net.Tools
               return image;
         }
 
-         public static string ImageToBase64(Image val)
+         public static string ImageToBase64(Image image)
          {
             MemoryStream stream = new MemoryStream();
            try
            {
-             val.Save(stream, val.RawFormat);
+             image.Save(stream, image.RawFormat);
            }
            catch (ArgumentNullException)
            {
-             val.Save(stream, ImageFormat.Bmp);
+             image.Save(stream, ImageFormat.Bmp);
            }
           return Convert.ToBase64String(stream.GetBuffer());
          }
 
-             public static byte[] ImageToBytes(Image im)
+             public static byte[] ImageToBytes(Image image,System.Drawing.Imaging.ImageFormat imageFormat)
             {
             MemoryStream ms = new MemoryStream();
 
-            im.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            image.Save(ms, imageFormat);
             return ms.ToArray();
             }
     }
